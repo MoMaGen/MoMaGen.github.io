@@ -1,80 +1,435 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoMaGen | Generating Demonstrations under Soft and Hard Constraints for Multi-Step Bimanual Mobile Manipulation</title>
-    <script>
-        function updatePullVideoSpeed() {
-            var all_pull_videos_ids = [
-                "supp-video",
-            ];
-            var speed = document.getElementById("pull-videos-menu-speed").value;
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <!-- <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/> -->
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <!-- <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/> -->
 
-            for (var i = 0; i < all_pull_videos_ids.length; i++) {
-                var video = document.getElementById(all_pull_videos_ids[i]);
-                video.playbackRate = speed;
-                video.play();
-            }
-        }
-    </script>
 
-    <link rel="stylesheet" href="assets/css/main.css">
+  <!-- <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG"> -->
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- Keywords for your paper to be indexed by-->
+  <!-- <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+
+  <title>MoMaGen</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" -->
+  <!-- rel="stylesheet"> -->
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
 </head>
-<body>
+<body>  
 
-<div id="title_slide">
-    <div class="title_left">
-        <h1>MoMaGen: Generating Demonstrations<br>under Soft and Hard Constraints<br>for Multi-Step Bimanual Mobile Manipulation</h1>
-        <div class="author-container">
-            <div class="author-name">Anonymous Author(s)</div>
-        </div>
-
-        <br>
-
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <video autoplay muted playsinline loop preload="auto" width="100%" id="supp-video">
-                    <source src="assets/videos/momagen.mp4" type="video/mp4">
-                </video>
-                <div class="text">Supplementary Video</div>
-            </div>
-        </div>
-        <br>
-
-        <!-- The dots/circles -->
-        <div style="text-align:center">
-            <div class="select is-medium">
-                <select id="pull-videos-menu-speed" onchange="updatePullVideoSpeed()" style="font-family: monospace">
-                    <option value=1.0 selected="selected">Speed 1x</option>
-                    <option value=2.0>Speed 2x</option>
-                    <option value=4.0>Speed 4x</option>
-                </select>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MoMaGen:</h1>
+            <h2 class="subtitle is-2 publication-subtitle">Generating Demonstrations under Soft and Hard Constraints
+for Multi-Step Bimanual Mobile Manipulation</h2>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+               <span class="author-block"><a href="https://www.chengshuli.me/" target="_blank">Chengshu Li<strong style="font-size: 24px;">*</strong></a>,</span>
+               <span class="author-block"><a href="https://mxu34.github.io/" target="_blank">Mengdi Xu<strong style="font-size: 24px;">*</strong></a>,</span>
+                <span class="author-block"><a href="https://arpitrf.github.io/" target="_blank">Arpit Bahety<strong style="font-size: 24px;">*</strong></a>,</span>
+                <span class="author-block"><a href="" target="_blank">Hang Yin</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Yunfan Jiang</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Huang Huang</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Josiah Wong</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Sujay Garlanka</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Cem Gokmen</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Ruohan Zhang</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Weiyu Liu</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Jiajun Wu</a>,</span>
+                <span class="author-block"><a href="https://robertomartinmartin.com/" target="_blank">Roberto Martín-Martín</a>,</span>
+                <span class="author-block"><a href="" target="_blank">Fei-Fei Li</a></span>                
             </div>
 
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Stanford University, University of Texas at Austin
+                      <!-- <br>Conferance name and year -->
+                    </span>
+                    <span class="eql-cntrb"><small><br><strong style="font-size: 24px;">*</strong>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <br>
+                  <!-- <span class="is-size-4 publication-venue">Robotics: Science and Systems (RSS), 2025<span> -->
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <!-- Paper PDF link -->
+                      <span class="link-block">
+                        <a href="https://openreview.net/pdf?id=4ATOUj1k9n" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                        </a>
+                      </span>
+
+                    <!-- Supplementary PDF link -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                  <!-- ArXiv abstract Link -->
+                  <!-- <span class="link-block">
+                    <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/ChengshuLi/MoMaGen" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                  </span>
+
+                  <!-- Poster Link -->
+                  <span class="link-block">
+                    <a href="https://drive.google.com/file/d/1-vLB9cB78d5Ea7pGZ8iFhLWUB8pndjV6/view?usp=sharing" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-file"></i>
+                    </span>
+                    <span>Poster</span>
+                  </a>
+                </span>
+
+                <!-- YouTube Link -->
+                <span class="link-block">
+                  <a href="https://youtu.be/AUcMNXlya5c" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fa fa-play-circle"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+            </div>
+          </div>
         </div>
-        <div id="abstract">
-            <h1>Abstract</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/momagen_teaser.png" alt="MoMaGen Overview" width="100%"/>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
             <p>
-              Imitation learning from large-scale, diverse human demonstrations has been shown to be effective for training robots, 
-              but collecting such data is costly and time-consuming. This challenge intensifies for multi-step bimanual mobile manipulation, 
-              where humans must teleoperate both the mobile base and two high-DoF arms. Prior X-Gen works have developed automated data generation 
-              frameworks for static (bimanual) manipulation tasks, augmenting a few human demos in simulation with novel scene configurations to 
-              synthesize large-scale datasets. However, prior works fall short for bimanual mobile manipulation tasks for two major reasons: 
-              1) a mobile base introduces the problem of how to place the robot base to enable downstream manipulation (reachability) and 
-              2) an active camera introduces the problem of how to position the camera to generate data for a visuomotor policy (visibility). 
-              To address these challenges, MoMaGen formulates data generation as a constrained optimization problem that satisfies 
-              hard constraints (e.g., reachability) while balancing soft constraints (e.g., visibility while navigation). This formulation 
-              generalizes across most existing automated data generation approaches and offers a principled foundation for developing future methods. 
-              We evaluate on four multi-step bimanual mobile manipulation tasks and find that MoMaGen enables the generation of much more diverse 
-              datasets than previous methods. As a result of the dataset diversity, we also show that the data generated by MoMaGen can be used to 
-              train successful imitation learning policies using a single source demo.
+                Imitation learning from large-scale, diverse human demonstrations has been shown to be effective for training robots, but collecting such data is costly and time-consuming. This challenge intensifies for multi-step bimanual mobile manipulation, where humans must teleoperate both the mobile base and two high-DoF arms. Prior X-Gen works have developed automated data generation frameworks for static (bimanual) manipulation tasks, augmenting a few human demos in simulation with novel scene configurations to synthesize large-scale datasets. However, prior works fall short for bimanual mobile manipulation tasks for two major reasons: 1) a mobile base introduces the problem of how to place the robot base to enable downstream manipulation (reachability) and 2) an active camera introduces the problem of how to position the camera to generate data for a visuomotor policy (visibility). To address these challenges, MoMaGen formulates data generation as a constrained optimization problem that satisfies hard constraints (e.g., reachability) while balancing soft constraints (e.g., visibility while navigation). This formulation generalizes across most existing automated data generation approaches and offers a principled foundation for developing future methods. We evaluate on four multi-step bimanual mobile manipulation tasks and find that MoMaGen enables the generation of much more diverse datasets than previous methods. As a result of the dataset diversity, we also show that the data generated by MoMaGen can be used to train successful imitation learning policies using a single source demo.
             </p>
         </div>
+      </div>
     </div>
-</div>
-<hr class="rounded">
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Youtube video -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3" style="text-align: center;">Video</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/AUcMNXlya5c?si=KVnrOnlrxM6Ln9aY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End youtube video -->
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;">Overview</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths is-centered has-text-centered">
+        <div class="content has-text-justified">
+          <p>
+            Given a single source demonstration, as well as annotations for
+            object-centric subtasks for each end-effector, MOMAGEN first randomizes scene configuration, and
+            transforms the end-effector poses from the source demo to the new objects' frame of reference. For
+            each subtask, it tries to sample a valid base pose that satisfies reachability and visibility constraints.
+            Once found, it plans a base and torso trajectory to reach the desired base and head camera pose while
+            trying to look at the target object during navigation. Once arrived, it plans an arm trajectory to the
+            pregrasp pose and uses task space control for replay, before retracting back to a tucked, neutral pose
+          </p>
+        </div>
+        <img src="static/images/momagen_method.png" alt="MoMaGen Overview" width="100%"/>
+        <!-- <video poster="" id="video3" autoplay controls muted loop height="100%" style="margin: 1.0%;">
+          <source src="static/videos/safemimic_website_method.mp4" type="video/mp4">
+        </video> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+<div class="container">
+  <h2 class="title is-2" style="text-align: center;">Data Generation</h2>
+  
+    <div class="columns is-centered" style="background-color: #f5f5f5;">
+        <div class="column is-four-fifths is-centered has-text-centered">
+            <div class="content has-text-justified">
+                <p>
+                Data generation using MoMaGen for D2 randomization. 
+                D2 applies extremely aggressive scene randomization: 
+                task-relevant objects are placed freely on existing furniture without 
+                constraints, and additional obstacles are added. To our knowledge, 
+                no prior work has tackled data generation at this level of scene variability.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns is-centered" style="background-color: #f5f5f5;">
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Pick Cup</h3>
+        <video poster="" id="video2" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/pick_cup_0000_external_camera.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Tidy Table</h3>
+        <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/tidy_table_0002_external_camera.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+    </div>
+
+  <div class="columns is-centered" style="background-color: #f5f5f5;">
+    <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Clean Pan</h3>
+        <video poster="" id="video2" autoplay controls muted height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/clean_pan_0000_external_camera.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+    <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Put Dishes Away</h3>
+        <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/dishes_away_0000_external_camera.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h2 class="title is-2" style="text-align: center;">Policy Rollout (Simulation)</h2>
+  
+  <div class="columns is-centered">
+    <div class="column is-two-fifths">
+      <h3 style="text-align: center; font-weight: bold;">Pick Cup (D0)</h3>
+      <video poster="" id="video2" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/policy_rollout_pick_cup_D0.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+    <div class="column is-two-fifths">
+      <h3 style="text-align: center; font-weight: bold;">Pick Cup (D1)</h3>
+      <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/policy_rollout_pick_cup_D1.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Tidy Table (D0)</h3>
+        <video poster="" id="video2" autoplay controls muted height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/policy_rollout_tidy_table_D0.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+<div class="container">
+    <h2 class="title is-2" style="text-align: center;">Policy Rollout (Real-world)</h2>
+  
+    <div class="columns is-centered" style="background-color: #f5f5f5;">
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">WB-VIMA: Trained from scratch on 40 real demos</h3> <br>
+        <video poster="" id="video2" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/sim2real failure 2x.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">WB-VIMA: Pretrained on 1k MoMaGen data, finetuned on 40 real demos</h3>
+        <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/sim2real_2x.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Pi0: Finetuned on 40 real demos</h3>
+        <video poster="" id="video2" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/pi0_without_momagen.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+        <div class="column is-two-fifths">
+        <h3 style="text-align: center; font-weight: bold;">Pi0: Finetuned on 1k MoMaGen sim data and 40 real demos</h3>
+        <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <!-- Your video file here -->
+            <source src="static/videos/pi0_with_momagen.mp4"
+            type="video/mp4">
+        </video>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h2 class="title is-2" style="text-align: center;">Cross-Embodiment Data Generation</h2>
+  
+  <div class="columns is-centered">
+        <div class="column is-four-fifths is-centered has-text-centered">
+            <div class="content has-text-justified">    
+                <p>
+                MoMaGen enables cross-embodiment data generation. In this example, 
+                a single demonstration collected on a Galexea R1 robot is used to 
+                generate trajectories for a TIAGo robot. By planning and replaying dense 
+                end-effector trajectories instead of joint-space paths, the approach remains 
+                largely agnostic to robot-specific kinematics. These results showcase the 
+                robustness and flexibility of our framework across platforms.
+                </p>
+            </div>
+        </div>
+    </div>
+  
+  <div class="columns is-centered">
+    <div class="column is-two-fifths">
+      <h3 style="text-align: center; font-weight: bold;">Data Collection on R1 Robot</h3>
+      <video poster="" id="video2" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/datagen_tiago.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+    <div class="column is-two-fifths">
+      <h3 style="text-align: center; font-weight: bold;">Data Generation on Tiago Robot</h3>
+      <video poster="" id="video3" autoplay controls muted loop height="100%" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+        <!-- Your video file here -->
+        <source src="static/videos/datagen_tiago.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!--BibTex citation -->
+  <section class="section hero is-light" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+      </code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
-<script src="assets/js/carousel.js"></script>
 </html>
